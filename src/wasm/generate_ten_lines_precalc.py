@@ -238,7 +238,7 @@ def pull_frlg_seeds():
             continue
 
         if row[0]:
-            fr_eng_nx_seeds.add_str_seed("mono", "h", "a", row[2])
+            fr_eng_nx_seeds.add_str_seed("stereo", "h", "a", row[2])
 
     sheet_txt = requests.get(
         LG_ENG_NX_SHEET,
@@ -251,8 +251,8 @@ def pull_frlg_seeds():
             continue
 
         if row[0]:
-            lg_eng_nx_seeds.add_str_seed("mono", "h", "a", row[2])
-            lg_eng_nx_seeds.add_str_seed("stereo", "h", "a", row[3])
+            lg_eng_nx_seeds.add_str_seed("stereo", "h", "a", row[2])
+            lg_eng_nx_seeds.add_str_seed("mono", "h", "a", row[3])
 
     fr_eng_seeds.save(sys.argv[1] + "/src/generated/fr_eng.bin")
     lg_eng_seeds.save(sys.argv[1] + "/src/generated/lg_eng.bin")

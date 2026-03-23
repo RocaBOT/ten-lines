@@ -315,7 +315,7 @@ export default function CalibrationForm({
                     parseInt(offset),
                     SEED_IDENTIFIER_TO_GAME[game],
                     gameConsole.startsWith("NX"),
-                    overworldFrames,
+                    parseInt(overworldFrames),
                     parseInt(trainerID),
                     parseInt(secretID),
                     calibrationFormState.staticCategory,
@@ -343,7 +343,7 @@ export default function CalibrationForm({
                     parseInt(offset),
                     SEED_IDENTIFIER_TO_GAME[game],
                     gameConsole.startsWith("NX"),
-                    overworldFrames,
+                    parseInt(overworldFrames),
                     parseInt(trainerID),
                     parseInt(secretID),
                     calibrationFormState.wildCategory,
@@ -617,7 +617,7 @@ export default function CalibrationForm({
                 </Dialog>
             </Box>
             <RangeInput
-                label={isTeachyTVMode ? "Final A Press Frame" : "Advances"}
+                label="Final A Press Frame"
                 name="advancesRange"
                 onChange={(_event, value) => {
                     setCalibrationURLState({
@@ -921,6 +921,7 @@ export default function CalibrationForm({
                             ttvAdvancesRange,
                             offset,
                             isStatic,
+                            overworldFrames,
                             trainerID,
                             secretID,
                             game,

@@ -49,9 +49,7 @@ const CalibrationTable = memo(function CalibrationTable({
                         <TableCell>Seed</TableCell>
                         <TableCell>Advances</TableCell>
                         {isMultiMethod && <TableCell>Method</TableCell>}
-                        {isTeachyTVMode && (
-                            <TableCell>Final A Press Frame</TableCell>
-                        )}
+                        <TableCell>Final A Press Frame</TableCell>
                         {isTeachyTVMode && (
                             <TableCell>TeachyTV Advances</TableCell>
                         )}
@@ -105,14 +103,12 @@ const CalibrationTable = memo(function CalibrationTable({
                                         }
                                     </TableCell>
                                 )}
-                                {isTeachyTVMode && (
-                                    <TableCell>
-                                        {row.advances -
-                                            row.ttvAdvances * (isSwitch ? 314 : 313) +
-                                            row.ttvAdvances -
-                                            (isSwitch ? overworldFrames : 0)}
-                                    </TableCell>
-                                )}
+                                <TableCell>
+                                    {row.advances -
+                                        row.ttvAdvances * (isSwitch ? 314 : 313) +
+                                        row.ttvAdvances -
+                                        (isSwitch ? overworldFrames : 0)}
+                                </TableCell>
                                 {isTeachyTVMode && (
                                     <TableCell>{row.ttvAdvances}</TableCell>
                                 )}
