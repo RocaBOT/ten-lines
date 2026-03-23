@@ -58,6 +58,7 @@ void check_seeds_static(
     u32 offset,
     Game game,
     bool wireless_adapter,
+    u32 overworld_frames,
     u16 trainer_id,
     u16 secret_id,
     int category,
@@ -73,8 +74,8 @@ void check_seeds_static(
     // in TTV mode this refers to the visual frame you trigger the encounter on
     // in normal mode this refers to the rng advance you trigger the encounter on
     // for the sake of timing, this is also treated as the final frame
-    u32 starting_final_frame = advances_range.min();
-    u32 ending_final_frame = advances_range.max();
+    u32 starting_final_frame = advances_range.min() + overworld_frames;
+    u32 ending_final_frame = advances_range.max() + overworld_frames;
     u32 initial_ttv_advances = ttv_advances_range.min();
     u32 ending_ttv_advances = std::min(ttv_advances_range.max(), ending_final_frame);
 
@@ -135,6 +136,7 @@ void check_seeds_wild(
     u32 offset,
     Game game,
     bool wireless_adapter,
+    u32 overworld_frames,
     u16 trainer_id,
     u16 secret_id,
     Encounter encounter_category,
@@ -149,8 +151,8 @@ void check_seeds_wild(
     emscripten::callback<void(emscripten::typed_array<ExtendedWildGeneratorState>)> result_callback,
     emscripten::callback<void(bool)> searching_callback)
 {
-    u32 starting_final_frame = advances_range.min();
-    u32 ending_final_frame = advances_range.max();
+    u32 starting_final_frame = advances_range.min() + overworld_frames;
+    u32 ending_final_frame = advances_range.max() + overworld_frames;
     u32 initial_ttv_advances = ttv_advances_range.min();
     u32 ending_ttv_advances = std::min(ttv_advances_range.max(), ending_final_frame);
 
