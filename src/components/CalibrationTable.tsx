@@ -74,6 +74,9 @@ const CalibrationTable = memo(function CalibrationTable({
                             return <TableRow key={index}>...</TableRow>;
                         } else if (index > 1000) {
                             return null;
+                        } else if (isSwitch && (row.advances - overworldFrames * 2 - (isTeachyTVMode ? row.ttvAdvances * 312 : 0)) < 200) {
+                            // SWITCH: Continue-screen proofing: hide results that require to pass the continue screen in less than 200 frames (tight, but doable)
+                            return null;
                         }
                         const seedMS = frameToMS(row.seedFrame, gameConsole);
                         const offsetMS =
@@ -105,9 +108,8 @@ const CalibrationTable = memo(function CalibrationTable({
                                 )}
                                 <TableCell>
                                     {row.advances -
-                                        row.ttvAdvances * (isSwitch ? 314 : 313) +
-                                        row.ttvAdvances -
-                                        (isSwitch ? overworldFrames : 0)}
+                                        row.ttvAdvances * 312 - 
+                                        overworldFrames}
                                 </TableCell>
                                 {isTeachyTVMode && (
                                     <TableCell>{row.ttvAdvances}</TableCell>
@@ -115,7 +117,7 @@ const CalibrationTable = memo(function CalibrationTable({
                                 {isSwitch && (
                                     <TableCell>
                                         {/* the overworld advances 2x2 in the switch games */}
-                                        {row.advances - overworldFrames * 2 - (isTeachyTVMode ? row.ttvAdvances * 313 : 0)}
+                                        {row.advances - overworldFrames * 2 - (isTeachyTVMode ? row.ttvAdvances * 312 : 0)}
                                     </TableCell>
                                 )}
                                 {!isStatic && (
