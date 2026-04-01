@@ -48,35 +48,37 @@ function TenLinesPages() {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <Box>
-                <TextField
-                    label={LABEL[lang]["language"]}
-                    margin="normal"
-                    style={{ textAlign: "left" }}
-                    onChange={(event) => {
-                        setSearchParams({ lang: event.target.value });
-                    }}
-                    value={lang}
-                    select
-                    fullWidth
-                >
-                    <MenuItem value="EN">English</MenuItem>,
-                    <MenuItem value="FR">Français</MenuItem>
-                </TextField>
-                <Tabs
-                    value={currentPage}
-                    onChange={(_, newValue) => {
-                        setSearchParams((prev) => {
-                            prev.set("page", newValue);
-                            return prev;
-                        });
-                    }}
-                    variant="fullWidth"
-                >
-                    <Tab label={LABEL[lang]["searcher"]} value={2} />
-                    <Tab label={LABEL[lang]["initial seed"]}  value={0} />
-                    <Tab label={LABEL[lang]["calibration"]}  value={1} />
-                    {bingoActive && <Tab label={LABEL[lang]["bingo"]}  value={3} />}
-                </Tabs>
+                <Box sx={{ flexDirection: "row", display: "flex" }}>
+                    <TextField
+                        label={LABEL[lang]["language"]}
+                        margin="normal"
+                        style={{ textAlign: "left" }}
+                        onChange={(event) => {
+                            setSearchParams({ lang: event.target.value });
+                        }}
+                        value={lang}
+                        select
+                        fullWidth
+                    >
+                        <MenuItem value="EN">English</MenuItem>,
+                        <MenuItem value="FR">Français</MenuItem>
+                    </TextField>
+                    <Tabs
+                        value={currentPage}
+                        onChange={(_, newValue) => {
+                            setSearchParams((prev) => {
+                                prev.set("page", newValue);
+                                return prev;
+                            });
+                        }}
+                        variant="fullWidth"
+                    >
+                        <Tab label={LABEL[lang]["searcher"]} value={2} />
+                        <Tab label={LABEL[lang]["initial seed"]}  value={0} />
+                        <Tab label={LABEL[lang]["calibration"]}  value={1} />
+                        {bingoActive && <Tab label={LABEL[lang]["bingo"]}  value={3} />}
+                    </Tabs>
+                </Box>
                 {pages}
             </Box>
 
