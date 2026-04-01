@@ -11,10 +11,7 @@ import {
     FormControlLabel,
     MenuItem,
     TextField,
-    Tooltip,
 } from "@mui/material";
-
-import InfoIcon from "@mui/icons-material/Info";
 
 import fetchTenLines, {
     COMBINED_WILD_METHOD,
