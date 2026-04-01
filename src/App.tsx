@@ -47,21 +47,21 @@ function TenLinesPages() {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            <TextField
-                label={LABEL[lang]["language"]}
-                margin="normal"
-                style={{ textAlign: "left" }}
-                onChange={(event) => {
-                    setSearchParams({ lang: event.target.value });
-                }}
-                value={lang}
-                select
-                fullWidth
-            >
-                <MenuItem value="EN">English</MenuItem>,
-                <MenuItem value="FR">Français</MenuItem>
-            </TextField>
             <Box>
+                <TextField
+                    label={LABEL[lang]["language"]}
+                    margin="normal"
+                    style={{ textAlign: "left" }}
+                    onChange={(event) => {
+                        setSearchParams({ lang: event.target.value });
+                    }}
+                    value={lang}
+                    select
+                    fullWidth
+                >
+                    <MenuItem value="EN">English</MenuItem>,
+                    <MenuItem value="FR">Français</MenuItem>
+                </TextField>
                 <Tabs
                     value={currentPage}
                     onChange={(_, newValue) => {

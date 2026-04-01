@@ -244,7 +244,8 @@ export const LABEL: Record<string, Record<string, string>> = {
         "calibration": "Calibration",
         "searcher": "Searcher",
         "initial seed": "Initial Seed",
-        "bingo": "Bingo"
+        "bingo": "Bingo",
+        "language": "Language",
     },
     "FR": {
         "game": "Jeu",
@@ -344,7 +345,8 @@ export const LABEL: Record<string, Record<string, string>> = {
         "calibration": "Calibration",
         "searcher": "Recherche",
         "initial seed": "Graine Initiale",
-        "bingo": "Bingo"
+        "bingo": "Bingo",
+        "language": "Langue",
     }
 }
 
