@@ -57,7 +57,7 @@ const CalibrationTable = memo(function CalibrationTable({
                             <TableCell>{LABEL[lang]["ttv advances"]}</TableCell>
                         )}
                         {isSwitch && (
-                            <TableCell>C{LABEL[lang]["continue frames"]}</TableCell>
+                            <TableCell>{LABEL[lang]["continue frames"]}</TableCell>
                         )}
                         {!isStatic && <TableCell>{LABEL[lang]["encounter slot"]}</TableCell>}
                         {!isStatic && <TableCell>{LABEL[lang]["encounter level"]}</TableCell>}
