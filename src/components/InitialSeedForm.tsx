@@ -256,6 +256,7 @@ export default function TenLinesForm({
                 gameConsole={gameConsole}
                 isTeachyTVMode={isTeachyTVMode}
                 teachyTVRegularOut={parseInt(teachyTVRegularOut, 10) ?? 0}
+                lang={lang}
             />
         </Box>
     );
