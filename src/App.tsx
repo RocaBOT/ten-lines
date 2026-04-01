@@ -88,6 +88,7 @@ function TenLinesPages() {
                 <TextField
                     label={LABEL[lang]["language"]}
                     size="small"
+                    margin="normal"
                     style={{ textAlign: "left" }}
                     onChange={(event) => {
                         setSearchParams({ lang: event.target.value });
