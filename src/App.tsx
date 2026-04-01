@@ -51,14 +51,13 @@ function TenLinesPages() {
                 <Box sx={{ flexDirection: "row", display: "flex" }}>
                     <TextField
                         label={LABEL[lang]["language"]}
-                        margin="normal"
+                        size="small"
                         style={{ textAlign: "left" }}
                         onChange={(event) => {
                             setSearchParams({ lang: event.target.value });
                         }}
                         value={lang}
                         select
-                        fullWidth
                     >
                         <MenuItem value="EN">English</MenuItem>,
                         <MenuItem value="FR">Français</MenuItem>
