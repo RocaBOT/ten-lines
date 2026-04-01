@@ -1,14 +1,17 @@
 import { Box, Checkbox, FormControlLabel } from "@mui/material";
 import { useState } from "react";
 import NumericalInput from "./NumericalInput";
+import { LABEL } from "../tenLines/resources";
 
 function TeachyTVEntry({
     isTeachyTVMode,
     teachyTVRegularOut,
+    lang,
     onChange,
 }: {
     isTeachyTVMode: boolean;
     teachyTVRegularOut: string;
+    lang: string;
     onChange: (
         isTeachyTVMode: boolean,
         teachyTVRegularOut: { isValid: boolean; value: string }
@@ -22,7 +25,7 @@ function TeachyTVEntry({
         >
             {isTeachyTVMode && (
                 <NumericalInput
-                    label="Minimum Advances Outside of TeachyTV"
+                    label={LABEL[lang]["min time outside ttv"]}
                     name="teachyTVRegularOut"
                     value={teachyTVRegularOut}
                     minimumValue={0}
@@ -46,7 +49,7 @@ function TeachyTVEntry({
                         }}
                     />
                 }
-                label="TeachyTV Mode"
+                label={LABEL[lang]["ttv mode"]}
                 sx={{
                     whiteSpace: "nowrap",
                 }}

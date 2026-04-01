@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { Box, Button, MenuItem, TextField } from "@mui/material";
 
-import fetchTenLines, { fetchSeedData, fixGameConsole, hexSeed } from "../tenLines";
+import fetchTenLines, { fetchSeedData, fixGameConsole, hexSeed, getLanguage } from "../tenLines";
 import NumericalInput from "./NumericalInput";
 import InitialSeedTable from "./InitialSeedTable";
 import type { InitialSeedResult } from "../tenLines/generated";
@@ -116,6 +116,7 @@ export default function TenLinesForm({
     const isFRLG = !game.endsWith("painting");
     const isSwitch = game.endsWith("nx");
     const isTeachyTVMode = teachyTVMode === "true" && isFRLG;
+    const lang = getLanguage();
 
     if (hidden) {
         return null;
@@ -230,6 +231,7 @@ export default function TenLinesForm({
                 <TeachyTVEntry
                     isTeachyTVMode={isTeachyTVMode}
                     teachyTVRegularOut={teachyTVRegularOut}
+                    lang={lang}
                     onChange={(isTeachyTVMode, teachyTVRegularOut) => {
                         setInitialSeedURLState({
                             teachyTVMode: isTeachyTVMode.toString(),

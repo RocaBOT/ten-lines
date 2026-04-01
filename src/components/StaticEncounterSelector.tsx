@@ -3,7 +3,7 @@ import React from "react";
 import type { EnumeratedStaticTemplate3 } from "../tenLines/generated";
 import fetchTenLines, { Game, getLanguage } from "../tenLines";
 import { MenuItem, TextField } from "@mui/material";
-import { GAMES, getName } from "../tenLines/resources";
+import { GAMES, LABEL, getName } from "../tenLines/resources";
 
 function StaticEncounterSelector({
     staticCategory,
@@ -51,7 +51,7 @@ function StaticEncounterSelector({
     return (
         <React.Fragment>
             <TextField
-                label="Category"
+                label={LABEL[lang]["category"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) => {
@@ -61,16 +61,16 @@ function StaticEncounterSelector({
                 select
                 fullWidth
             >
-                <MenuItem value="0">Starters</MenuItem>
-                <MenuItem value="1">Fossils</MenuItem>
-                <MenuItem value="2">Gifts</MenuItem>
-                {isFRLG && <MenuItem value="3">Game Corner</MenuItem>}
-                <MenuItem value="4">Stationary</MenuItem>
-                <MenuItem value="5">Legends</MenuItem>
-                {isFRLGE && <MenuItem value="6">Events</MenuItem>}
-                <MenuItem value="7">Roamers</MenuItem>
+                <MenuItem value="0">{LABEL[lang]["starters"]}</MenuItem>
+                <MenuItem value="1">{LABEL[lang]["fossils"]}</MenuItem>
+                <MenuItem value="2">{LABEL[lang]["gifts"]}</MenuItem>
+                {isFRLG && <MenuItem value="3">{LABEL[lang]["game corner"]}</MenuItem>}
+                <MenuItem value="4">{LABEL[lang]["stationary"]}</MenuItem>
+                <MenuItem value="5">{LABEL[lang]["legends"]}</MenuItem>
+                {isFRLGE && <MenuItem value="6">{LABEL[lang]["events"]}</MenuItem>}
+                <MenuItem value="7">{LABEL[lang]["roamers"]}</MenuItem>
                 {!isFRLG && (
-                    <MenuItem value="8">Blisy's E-Reader Events</MenuItem>
+                    <MenuItem value="8">{LABEL[lang]["blisy e-reader"]}</MenuItem>
                 )}
             </TextField>
             <TextField

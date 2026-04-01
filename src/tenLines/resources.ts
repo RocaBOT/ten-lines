@@ -210,6 +210,16 @@ export const LABEL: Record<string, Record<string, string>> = {
         "searching": "Searching...",
         "submit": "Submit",
         "nature help text": "Required for IV calculation",
+        "starters": "Starters",
+        "fossils": "Fossils",
+        "gifts": "Gifts",
+        "game corner": "Game Corner",
+        "stationary": "Stationary",
+        "legends": "Legends",
+        "events": "Events",
+        "roamers": "Roamers",
+        "blisy e-reader": "Blisy's E-Reader Events",
+        "min time outside ttv": "Minimum Advances Outside of TeachyTV"
     },
     "FR": {
         "game": "Jeu",
@@ -275,6 +285,16 @@ export const LABEL: Record<string, Record<string, string>> = {
         "searching": "Recherche...",
         "submit": "Envoyer",
         "nature help text": "Requis pour le calcul d'IV",
+        "starters": "Starters",
+        "fossils": "Fossiles",
+        "gifts": "Cadeaux",
+        "game corner": "Casino",
+        "stationary": "Fixes",
+        "legends": "Légendaires",
+        "events": "Événements",
+        "roamers": "Fuyards",
+        "blisy e-reader": "Événements E-Reader de Blisy",
+        "min time outside ttv": "Avances Minimum hors de la TV ABC"
     }
 }
 
