@@ -19,6 +19,7 @@ import {
     NATURES,
     SHININESS,
     TYPES,
+    LABEL
 } from "../tenLines/resources";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -55,19 +56,19 @@ const SearcherTable = memo(function SearcherTable({
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Seed</TableCell>
-                        {isMultiMethod && <TableCell>Method</TableCell>}
-                        {!isStatic && <TableCell>Slot</TableCell>}
-                        {!isStatic && <TableCell>Level</TableCell>}
-                        <TableCell>PID</TableCell>
-                        <TableCell>Shiny</TableCell>
-                        <TableCell>Nature</TableCell>
-                        <TableCell>Ability</TableCell>
-                        <TableCell>IVs</TableCell>
-                        <TableCell>Hidden</TableCell>
-                        <TableCell>Power</TableCell>
-                        <TableCell>Gender</TableCell>
-                        <TableCell>Open In Initial Seed</TableCell>
+                        <TableCell>{LABEL[lang]["seed"]}</TableCell>
+                        {isMultiMethod && <TableCell>{LABEL[lang]["method"]}</TableCell>}
+                        {!isStatic && <TableCell>{LABEL[lang]["encounter slot"]}</TableCell>}
+                        {!isStatic && <TableCell>{LABEL[lang]["encounter level"]}</TableCell>}
+                        <TableCell>{LABEL[lang]["pid"]}</TableCell>
+                        <TableCell>{LABEL[lang]["shiny"]}</TableCell>
+                        <TableCell>{LABEL[lang]["nature"]}</TableCell>
+                        <TableCell>{LABEL[lang]["ability"]}</TableCell>
+                        <TableCell>{LABEL[lang]["ivs"]}</TableCell>
+                        <TableCell>{LABEL[lang]["hidden power 1"]}</TableCell>
+                        <TableCell>{LABEL[lang]["hidden power 2"]}</TableCell>
+                        <TableCell>{LABEL[lang]["gender"]}</TableCell>
+                        <TableCell>{LABEL[lang]["open in init seed"]}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -143,7 +144,7 @@ const SearcherTable = memo(function SearcherTable({
                                             }
                                         }}
                                     >
-                                        Initial Seed
+                                        {LABEL[lang]["initial seed"]}
                                     </Button>
                                 </TableCell>
                             </TableRow>
