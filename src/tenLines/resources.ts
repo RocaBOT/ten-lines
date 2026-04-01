@@ -219,7 +219,20 @@ export const LABEL: Record<string, Record<string, string>> = {
         "events": "Events",
         "roamers": "Roamers",
         "blisy e-reader": "Blisy's E-Reader Events",
-        "min time outside ttv": "Minimum Advances Outside of TeachyTV"
+        "min time outside ttv": "Minimum Advances Outside of TeachyTV",
+        "seed": "Seed",
+        "advances": "Advances",
+        "final a press frame": "Final A Press Frame",
+        "ttv advances": "TeachyTV Advances",
+        "continue frames": "Continue Screen Frames",
+        "encounter slot": "Slot",
+        "encounter level": "Level",
+        "pid": "PID",
+        "shiny": "Shiny",
+        "ability": "Ability",
+        "ivs": "IVs",
+        "hidden power 1": "Hidden",
+        "hidden power 2": "Power",
     },
     "FR": {
         "game": "Jeu",
@@ -294,7 +307,20 @@ export const LABEL: Record<string, Record<string, string>> = {
         "events": "Événements",
         "roamers": "Fuyards",
         "blisy e-reader": "Événements E-Reader de Blisy",
-        "min time outside ttv": "Avances Minimum hors de la TV ABC"
+        "min time outside ttv": "Avances Minimum hors de la TV ABC",
+        "seed": "Graine",
+        "advances": "Avances",
+        "final a press frame": "Frame d'Appui Final sur A",
+        "ttv advances": "Avances TV ABC",
+        "continue frames": "Frames sur l'Écran Continuer",
+        "encounter slot": "Slot",
+        "encounter level": "Niveau",
+        "pid": "PID",
+        "shiny": "Chromatique",
+        "ability": "Talent",
+        "ivs": "IVs",
+        "hidden power 1": "Puissance",
+        "hidden power 2": "Cachée",
     }
 }
 

@@ -20,6 +20,7 @@ import {
     NATURES,
     SHININESS,
     TYPES,
+    LABEL
 } from "../tenLines/resources";
 
 const CalibrationTable = memo(function CalibrationTable({
@@ -48,26 +49,26 @@ const CalibrationTable = memo(function CalibrationTable({
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Seed</TableCell>
-                        <TableCell>Advances</TableCell>
-                        {isMultiMethod && <TableCell>Method</TableCell>}
-                        <TableCell>Final A Press Frame</TableCell>
+                        <TableCell>{LABEL[lang]["seed"]}</TableCell>
+                        <TableCell>{LABEL[lang]["advances"]}</TableCell>
+                        {isMultiMethod && <TableCell>{LABEL[lang]["method"]}</TableCell>}
+                        <TableCell>{LABEL[lang]["final a press frame"]}</TableCell>
                         {isTeachyTVMode && (
-                            <TableCell>TeachyTV Advances</TableCell>
+                            <TableCell>{LABEL[lang]["ttv advances"]}</TableCell>
                         )}
                         {isSwitch && (
-                            <TableCell>Continue Screen Frames</TableCell>
+                            <TableCell>C{LABEL[lang]["continue frames"]}</TableCell>
                         )}
-                        {!isStatic && <TableCell>Slot</TableCell>}
-                        {!isStatic && <TableCell>Level</TableCell>}
-                        <TableCell>PID</TableCell>
-                        <TableCell>Shiny</TableCell>
-                        <TableCell>Nature</TableCell>
-                        <TableCell>Ability</TableCell>
-                        <TableCell>IVs</TableCell>
-                        <TableCell>Hidden</TableCell>
-                        <TableCell>Power</TableCell>
-                        <TableCell>Gender</TableCell>
+                        {!isStatic && <TableCell>{LABEL[lang]["encounter slot"]}</TableCell>}
+                        {!isStatic && <TableCell>{LABEL[lang]["encounter level"]}</TableCell>}
+                        <TableCell>{LABEL[lang]["pid"]}</TableCell>
+                        <TableCell>{LABEL[lang]["shiny"]}</TableCell>
+                        <TableCell>{LABEL[lang]["nature"]}</TableCell>
+                        <TableCell>{LABEL[lang]["ability"]}</TableCell>
+                        <TableCell>{LABEL[lang]["ivs"]}</TableCell>
+                        <TableCell>{LABEL[lang]["hidden power 1"]}</TableCell>
+                        <TableCell>{LABEL[lang]["hidden power 2"]}</TableCell>
+                        <TableCell>{LABEL[lang]["gender"]}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
