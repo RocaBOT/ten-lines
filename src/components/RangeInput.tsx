@@ -1,7 +1,6 @@
 import { Box, Button, Tooltip } from "@mui/material";
 import { useState } from "react";
 import NumericalInput from "./NumericalInput";
-import InfoIcon from "@mui/icons-material/Info";
 
 
 function RangeInput({
@@ -13,7 +12,7 @@ function RangeInput({
     maximumValue,
     onChange,
     resetButton = false,
-    infotext,
+    helperText,
     ...props
 }: {
     label_min: string;
@@ -30,7 +29,7 @@ function RangeInput({
         }
     ) => void;
     resetButton?: boolean;
-    infotext?: string;
+    helperText?: string;
     [key: string]: any;
 }) {
     const [minValid, setMinValid] = useState(true);
@@ -68,14 +67,6 @@ function RangeInput({
 
     return (
         <Box sx={{ display: "flex" }}>
-            {(infotext?.length) && <span
-                    style={{
-                        margin: "25px 10px",
-                        alignSelf: "left",
-                    }}
-                >
-                    <Tooltip title={infotext}><InfoIcon fontSize="large"/></Tooltip>
-                </span>}
             <NumericalInput
                 label={`${label_min}`}
                 name={name}
@@ -83,6 +74,7 @@ function RangeInput({
                 maximumValue={maxValid ? parseInt(value[1]) : maximumValue}
                 onChange={minChange}
                 value={value[0]}
+                helperText={helperText}
                 {...props}
             />
             <span
@@ -100,6 +92,7 @@ function RangeInput({
                 maximumValue={maximumValue}
                 onChange={maxChange}
                 value={value[1]}
+                helperText=""
                 {...props}
             />
             {resetButton && (
