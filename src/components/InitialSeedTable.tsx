@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { memo } from "react";
 import { frameToMS, hexSeed, teachyTVConversion } from "../tenLines";
+import { LABEL } from "../tenLines/resources";
 import type { InitialSeedResult } from "../tenLines/generated";
 import { Button } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
@@ -21,12 +22,14 @@ const InitialSeedTable = memo(function InitialSeedTable({
     gameConsole,
     isTeachyTVMode,
     teachyTVRegularOut,
+    lang
 }: {
     rows: InitialSeedResult[];
     isFRLG: boolean;
     gameConsole: string;
     isTeachyTVMode: boolean;
     teachyTVRegularOut: number;
+    lang: string;
 }) {
     const [_, setSearchParams] = useSearchParams();
     function humanizeSettings(settings: string | undefined) {
@@ -39,25 +42,25 @@ const InitialSeedTable = memo(function InitialSeedTable({
             held_button,
         ] = settings.split("_");
         const humanizedTerms: Record<string, string> = {
-            stereo: "Stereo",
-            mono: "Mono",
+            stereo: LABEL[lang]["stereo"],
+            mono: LABEL[lang]["mono"],
             start: "Start",
             select: "Select",
             a: "A",
             l: "L",
             r: "R",
-            startup: "Startup",
-            blackout: "Blackout",
+            startup: LABEL[lang]["startup"],
+            blackout: LABEL[lang]["lackout"],
             al: "A+L",
-            none: "None",
+            none: LABEL[lang]["none"],
             undefined: "",
         };
         const humanizedButtonModes: Record<string, string> = {
-            a: "L=A",
-            h: "Help",
-            r: "LR",
+            a: LABEL[lang]["l eq a"],
+            h: LABEL[lang]["help"],
+            r: LABEL[lang]["lr"],
         };
-        return `${humanizedTerms[sound]} | ${humanizedButtonModes[buttonMode]} | Seed Button: ${humanizedTerms[active_button]} | Extra Button: ${humanizedTerms[held_button_modifier]} ${humanizedTerms[held_button]}`;
+        return `${humanizedTerms[sound]} | ${humanizedButtonModes[buttonMode]} | ${LABEL[lang]["seed button"]}: ${humanizedTerms[active_button]} | ${LABEL[lang]["extra button"]}: ${humanizedTerms[held_button_modifier]} ${humanizedTerms[held_button]}`;
     }
 
     function openInCalibration(row: InitialSeedResult, isAuxClick: boolean) {
@@ -133,20 +136,20 @@ const InitialSeedTable = memo(function InitialSeedTable({
             <Table>
                 <TableHead>
                     <TableRow>
-                        {!isFRLG && <TableCell>Seed (dec)</TableCell>}
-                        <TableCell>Seed (hex)</TableCell>
-                        <TableCell>Advances</TableCell>
+                        {!isFRLG && <TableCell>{LABEL[lang]["seed"]} (dec)</TableCell>}
+                        <TableCell>{LABEL[lang]["seed"]} (hex)</TableCell>
+                        <TableCell>{LABEL[lang]["advances"]}</TableCell>
                         {isTeachyTVMode && (
-                            <TableCell>Final A Press Frame</TableCell>
+                            <TableCell>{LABEL[lang]["final a press frame"]}</TableCell>
                         )}
                         {isTeachyTVMode && (
-                            <TableCell>TeachyTV Advances</TableCell>
+                            <TableCell>{LABEL[lang]["ttv advances"]}</TableCell>
                         )}
-                        <TableCell>Estimated Total Frames</TableCell>
-                        <TableCell>Estimated Total Time</TableCell>
-                        <TableCell>Seed Time</TableCell>
-                        {isFRLG && <TableCell>Settings</TableCell>}
-                        <TableCell>Open In Calibration</TableCell>
+                        <TableCell>{LABEL[lang]["est total frames"]}</TableCell>
+                        <TableCell>{LABEL[lang]["est total time"]}</TableCell>
+                        <TableCell>{LABEL[lang]["seed time"]}</TableCell>
+                        {isFRLG && <TableCell>{LABEL[lang]["settings"]}</TableCell>}
+                        <TableCell>{LABEL[lang]["open in calibration"]}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -224,7 +227,7 @@ const InitialSeedTable = memo(function InitialSeedTable({
                                             }
                                         }}
                                     >
-                                        Calibration
+                                        {LABEL[lang]["calibration"]}
                                     </Button>
                                 </TableCell>
                             </TableRow>

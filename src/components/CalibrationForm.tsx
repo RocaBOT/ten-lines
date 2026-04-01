@@ -950,7 +950,7 @@ export default function CalibrationForm({
                     fullWidth
                     sx={{ my: 0.5 }}
                 >
-                    Bingo
+                    {LABEL[lang]["bingo"]}
                 </Button>
             )}
             <Button

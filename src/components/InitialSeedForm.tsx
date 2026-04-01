@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Box, Button, MenuItem, TextField } from "@mui/material";
 
 import fetchTenLines, { fetchSeedData, fixGameConsole, hexSeed, getLanguage } from "../tenLines";
+import { LABEL, LIST_GAME } from "../tenLines/resources";
 import NumericalInput from "./NumericalInput";
 import InitialSeedTable from "./InitialSeedTable";
 import type { InitialSeedResult } from "../tenLines/generated";
@@ -125,7 +126,7 @@ export default function TenLinesForm({
     return (
         <Box component="form" onSubmit={handleSubmit} sx={{ sx }}>
             <NumericalInput
-                label="Target Seed"
+                label={LABEL[lang]["target seed"]}
                 name="targetSeed"
                 minimumValue={0}
                 maximumValue={0xffffffff}
@@ -144,7 +145,7 @@ export default function TenLinesForm({
                 value={targetSeed}
             ></NumericalInput>
             <NumericalInput
-                label="Result Count"
+                label={LABEL[lang]["result count"]}
                 name="resultCount"
                 minimumValue={0}
                 maximumValue={5000}
@@ -160,7 +161,7 @@ export default function TenLinesForm({
                 value={count}
             ></NumericalInput>
             <NumericalInput
-                label="Offset"
+                label={LABEL[lang]["offset"]}
                 name="offset"
                 minimumValue={0}
                 maximumValue={4294967295}
@@ -176,7 +177,7 @@ export default function TenLinesForm({
                 value={offset}
             ></NumericalInput>
             <TextField
-                label="Game"
+                label={LABEL[lang]["game"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) => {
@@ -188,23 +189,23 @@ export default function TenLinesForm({
                 select
                 fullWidth
             >
-                <MenuItem value="r_painting">Ruby Painting Seed</MenuItem>
-                <MenuItem value="s_painting">Sapphire Painting Seed</MenuItem>
-                <MenuItem value="e_painting">Emerald Painting Seed</MenuItem>
-                <MenuItem value="fr">FireRed (ENG)</MenuItem>
-                <MenuItem value="fr_eu">FireRed (SPA/FRE/ITA/GER)</MenuItem>
-                <MenuItem value="fr_jpn_1_0">FireRed (JPN) (1.0)</MenuItem>
-                <MenuItem value="fr_jpn_1_1">FireRed (JPN) (1.1)</MenuItem>
-                <MenuItem value="fr_nx">Switch FireRed (ENG/SPA/FRE/ITA/GER)</MenuItem>
-                <MenuItem value="fr_mgba">FireRed (ENG) (MGBA 10.5)</MenuItem>
-                <MenuItem value="lg">LeafGreen (ENG)</MenuItem>
-                <MenuItem value="lg_eu">LeafGreen (SPA/FRE/ITA/GER)</MenuItem>
-                <MenuItem value="lg_jpn">LeafGreen (JPN)</MenuItem>
-                <MenuItem value="lg_nx">Switch LeafGreen (ENG/SPA/FRE/ITA/GER)</MenuItem>
-                <MenuItem value="lg_mgba">LeafGreen (ENG) (MGBA 10.5)</MenuItem>
+                <MenuItem value="r_painting">{LIST_GAME[lang]["r_painting"]}</MenuItem>
+                <MenuItem value="s_painting">{LIST_GAME[lang]["s_painting"]}</MenuItem>
+                <MenuItem value="e_painting">{LIST_GAME[lang]["e_painting"]}</MenuItem>
+                <MenuItem value="fr">{LIST_GAME[lang]["fr"]}</MenuItem>
+                <MenuItem value="fr_eu">{LIST_GAME[lang]["fr_eu"]}</MenuItem>
+                <MenuItem value="fr_jpn_1_0">{LIST_GAME[lang]["fr_jpn_1_0"]}</MenuItem>
+                <MenuItem value="fr_jpn_1_1">{LIST_GAME[lang]["fr_jpn_1_1"]}</MenuItem>
+                <MenuItem value="fr_nx">{LIST_GAME[lang]["fr_nx"]}</MenuItem>
+                <MenuItem value="fr_mgba">{LIST_GAME[lang]["fr_mgba"]}</MenuItem>
+                <MenuItem value="lg">{LIST_GAME[lang]["lg"]}</MenuItem>
+                <MenuItem value="lg_eu">{LIST_GAME[lang]["lg_eu"]}</MenuItem>
+                <MenuItem value="lg_jpn">{LIST_GAME[lang]["lg_jpn"]}</MenuItem>
+                <MenuItem value="lg_nx">{LIST_GAME[lang]["lg_nx"]}</MenuItem>
+                <MenuItem value="lg_mgba">{LIST_GAME[lang]["lg_mgba"]}</MenuItem>
             </TextField>
             <TextField
-                label="Console"
+                label={LABEL[lang]["console"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) => {
@@ -247,7 +248,7 @@ export default function TenLinesForm({
                 disabled={isNotSubmittable}
                 fullWidth
             >
-                Submit
+                {LABEL[lang]["submit"]}
             </Button>
             <InitialSeedTable
                 rows={data}

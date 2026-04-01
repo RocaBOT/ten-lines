@@ -233,6 +233,18 @@ export const LABEL: Record<string, Record<string, string>> = {
         "ivs": "IVs",
         "hidden power 1": "Hidden",
         "hidden power 2": "Power",
+        "result count": "Result Count",
+        "startup": "Startup",
+        "blackout": "Blackout",
+        "est total frames": "Estimated Total Frames",
+        "est total time": "Estimated Total Time",
+        "seed time": "Seed Time",
+        "settings": "Settings",
+        "open in calibration": "Open In Calibration",
+        "calibration": "Calibration",
+        "searcher": "Searcher",
+        "initial seed": "Initial Seed",
+        "bingo": "Bingo"
     },
     "FR": {
         "game": "Jeu",
@@ -321,6 +333,18 @@ export const LABEL: Record<string, Record<string, string>> = {
         "ivs": "IVs",
         "hidden power 1": "Puissance",
         "hidden power 2": "Cachée",
+        "result count": "Nombre de Résultats",
+        "startup": "Démarrage",
+        "blackout": "Fondu au noir",
+        "est total frames": "Frames Totales Estimées",
+        "est total time": "Temps Total estimé",
+        "seed time": "Temps Graine",
+        "settings": "Paramètres",
+        "open in calibration": "Ouvrir en Calibration",
+        "calibration": "Calibration",
+        "searcher": "Recherche",
+        "initial seed": "Graine Initiale",
+        "bingo": "Bingo"
     }
 }
 

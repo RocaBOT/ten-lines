@@ -5,11 +5,13 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import InitialSeedForm from "./components/InitialSeedForm";
 import SearcherForm from "./components/SearcherForm";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs, TextField, MenuItem } from "@mui/material";
 import CalibrationForm from "./components/CalibrationForm";
 import FrLgSeedsTimestamp from "./wasm/src/generated/frlg_seeds_timestamp.txt?raw";
 import { BrowserRouter, useSearchParams } from "react-router-dom";
 import BingoPage, { getBingoActive } from "./components/BingoPage";
+import { LABEL } from "./tenLines/resources";
+import { getLanguage } from "./tenLines";
 
 const darkTheme = createTheme({
     palette: {
@@ -21,6 +23,7 @@ function TenLinesPages() {
     const [searchParams, setSearchParams] = useSearchParams();
     const currentPage = parseInt(searchParams.get("page") || "0") ?? 0;
     const bingoActive = getBingoActive();
+    const lang = getLanguage();
 
     const pages = [
         <InitialSeedForm
@@ -44,6 +47,20 @@ function TenLinesPages() {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
+            <TextField
+                label={LABEL[lang]["language"]}
+                margin="normal"
+                style={{ textAlign: "left" }}
+                onChange={(event) => {
+                    setSearchParams({ lang: event.target.value });
+                }}
+                value={lang}
+                select
+                fullWidth
+            >
+                <MenuItem value="EN">English</MenuItem>,
+                <MenuItem value="FR">Français</MenuItem>
+            </TextField>
             <Box>
                 <Tabs
                     value={currentPage}
@@ -55,10 +72,10 @@ function TenLinesPages() {
                     }}
                     variant="fullWidth"
                 >
-                    <Tab label="Searcher" value={2} />
-                    <Tab label="Initial Seed" value={0} />
-                    <Tab label="Calibration" value={1} />
-                    {bingoActive && <Tab label="Bingo" value={3} />}
+                    <Tab label={LABEL[lang]["searcher"]} value={2} />
+                    <Tab label={LABEL[lang]["initial seed"]}  value={0} />
+                    <Tab label={LABEL[lang]["calibration"]}  value={1} />
+                    {bingoActive && <Tab label={LABEL[lang]["bingo"]}  value={3} />}
                 </Tabs>
                 {pages}
             </Box>
