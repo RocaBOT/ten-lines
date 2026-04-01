@@ -13,13 +13,13 @@ import type {
     FRLGContiguousSeedEntry,
 } from "../tenLines/generated";
 import {
-    ABILITIES_EN,
-    GENDERS_EN,
-    getNameEn,
-    METHODS_EN,
-    NATURES_EN,
-    SHININESS_EN,
-    TYPES_EN,
+    ABILITIES,
+    GENDERS,
+    getName,
+    METHODS,
+    NATURES,
+    SHININESS,
+    TYPES,
 } from "../tenLines/resources";
 
 const CalibrationTable = memo(function CalibrationTable({
@@ -30,7 +30,8 @@ const CalibrationTable = memo(function CalibrationTable({
     isMultiMethod,
     isTeachyTVMode,
     isSwitch,
-    overworldFrames
+    overworldFrames,
+    lang
 }: {
     rows: ExtendedGeneratorState[] | ExtendedWildGeneratorState[];
     target: FRLGContiguousSeedEntry;
@@ -40,6 +41,7 @@ const CalibrationTable = memo(function CalibrationTable({
     isTeachyTVMode: boolean;
     isSwitch: boolean;
     overworldFrames: number;
+    lang: string;
 }) {
     return (
         <TableContainer component={Paper}>
@@ -49,9 +51,7 @@ const CalibrationTable = memo(function CalibrationTable({
                         <TableCell>Seed</TableCell>
                         <TableCell>Advances</TableCell>
                         {isMultiMethod && <TableCell>Method</TableCell>}
-                        {isTeachyTVMode && (
-                            <TableCell>Final A Press Frame</TableCell>
-                        )}
+                        <TableCell>Final A Press Frame</TableCell>
                         {isTeachyTVMode && (
                             <TableCell>TeachyTV Advances</TableCell>
                         )}
@@ -76,6 +76,9 @@ const CalibrationTable = memo(function CalibrationTable({
                             return <TableRow key={index}>...</TableRow>;
                         } else if (index > 1000) {
                             return null;
+                        } else if (isSwitch && (row.advances - overworldFrames * 2 - (isTeachyTVMode ? row.ttvAdvances * 312 : 0)) < 200) {
+                            // SWITCH: Continue-screen proofing: hide results that require to pass the continue screen in less than 200 frames (tight, but doable)
+                            return null;
                         }
                         const seedMS = frameToMS(row.seedTime / 16, gameConsole);
                         const offsetMS =
@@ -97,7 +100,7 @@ const CalibrationTable = memo(function CalibrationTable({
                                 {isMultiMethod && (
                                     <TableCell>
                                         {
-                                            METHODS_EN[
+                                            METHODS[lang][
                                             (
                                                 row as ExtendedWildGeneratorState
                                             ).method
@@ -105,20 +108,18 @@ const CalibrationTable = memo(function CalibrationTable({
                                         }
                                     </TableCell>
                                 )}
-                                {isTeachyTVMode && (
-                                    <TableCell>
-                                        {row.advances -
-                                            row.ttvAdvances * 313 +
-                                            row.ttvAdvances}
-                                    </TableCell>
-                                )}
+                                <TableCell>
+                                    {row.advances -
+                                        row.ttvAdvances * 312 - 
+                                        overworldFrames}
+                                </TableCell>
                                 {isTeachyTVMode && (
                                     <TableCell>{row.ttvAdvances}</TableCell>
                                 )}
                                 {isSwitch && (
                                     <TableCell>
                                         {/* the overworld advances 2x2 in the switch games */}
-                                        {row.advances - overworldFrames * 2}
+                                        {row.advances - overworldFrames * 2 - (isTeachyTVMode ? row.ttvAdvances * 312 : 0)}
                                     </TableCell>
                                 )}
                                 {!isStatic && (
@@ -128,11 +129,12 @@ const CalibrationTable = memo(function CalibrationTable({
                                                 .encounterSlot
                                         }
                                         :{" "}
-                                        {getNameEn(
+                                        {getName(
                                             (row as ExtendedWildGeneratorState)
                                                 .species,
                                             (row as ExtendedWildGeneratorState)
-                                                .form
+                                                .form,
+                                            lang
                                         )}
                                     </TableCell>
                                 )}
@@ -145,18 +147,18 @@ const CalibrationTable = memo(function CalibrationTable({
                                     </TableCell>
                                 )}
                                 <TableCell>{hexSeed(row.pid, 32)}</TableCell>
-                                <TableCell>{SHININESS_EN[row.shiny]}</TableCell>
-                                <TableCell>{NATURES_EN[row.nature]}</TableCell>
+                                <TableCell>{SHININESS[lang][row.shiny]}</TableCell>
+                                <TableCell>{NATURES[lang][row.nature]}</TableCell>
                                 <TableCell>
                                     {row.ability}:{" "}
-                                    {ABILITIES_EN[row.abilityIndex - 1]}
+                                    {ABILITIES[lang][row.abilityIndex - 1]}
                                 </TableCell>
                                 <TableCell>{row.ivs.join("/")}</TableCell>
                                 <TableCell>
-                                    {TYPES_EN[row.hiddenPower]}
+                                    {TYPES[lang][row.hiddenPower]}
                                 </TableCell>
                                 <TableCell>{row.hiddenPowerStrength}</TableCell>
-                                <TableCell>{GENDERS_EN[row.gender]}</TableCell>
+                                <TableCell>{GENDERS[row.gender]}</TableCell>
                             </TableRow>
                         );
                     })}

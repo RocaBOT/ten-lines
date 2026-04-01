@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import type { EnumeratedStaticTemplate3 } from "../tenLines/generated";
-import fetchTenLines, { Game } from "../tenLines";
+import fetchTenLines, { Game, getLanguage } from "../tenLines";
 import { MenuItem, TextField } from "@mui/material";
-import { GAMES_EN, getNameEn } from "../tenLines/resources";
+import { GAMES, getName } from "../tenLines/resources";
 
 function StaticEncounterSelector({
     staticCategory,
@@ -16,6 +16,7 @@ function StaticEncounterSelector({
     onChange: (staticCategory: number, staticPokemon: number) => void;
     game?: number;
 }) {
+    const lang = getLanguage();
     const [staticTemplates, setStaticTemplates] = useState<
         EnumeratedStaticTemplate3[]
     >([]);
@@ -85,13 +86,13 @@ function StaticEncounterSelector({
             >
                 {staticTemplates.map((template) => (
                     <MenuItem key={template.index} value={template.index}>
-                        {`${getNameEn(template.species, template.form)}${
+                        {`${getName(template.species, template.form, lang)}${
                             template.shiny == 1
                                 ? " (Shiny Locked)"
                                 : template.species == 251
                                 ? " (Lock Break)"
                                 : ""
-                        } - ${GAMES_EN[template.version]}`}
+                        } - ${GAMES[lang][template.version]}`}
                     </MenuItem>
                 ))}
             </TextField>

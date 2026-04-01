@@ -6,19 +6,19 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { memo } from "react";
-import { hexSeed } from "../tenLines";
+import { getLanguage, hexSeed } from "../tenLines";
 import type {
     ExtendedSearcherState,
     ExtendedWildSearcherState,
 } from "../tenLines/generated";
 import {
-    ABILITIES_EN,
-    GENDERS_EN,
-    getNameEn,
-    METHODS_EN,
-    NATURES_EN,
-    SHININESS_EN,
-    TYPES_EN,
+    ABILITIES,
+    GENDERS,
+    getName,
+    METHODS,
+    NATURES,
+    SHININESS,
+    TYPES,
 } from "../tenLines/resources";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -32,6 +32,7 @@ const SearcherTable = memo(function SearcherTable({
     isStatic: boolean;
     isMultiMethod: boolean;
 }) {
+    const lang = getLanguage();
     const [_, setSearchParams] = useSearchParams();
 
     function openInInitialSeed(
@@ -82,7 +83,7 @@ const SearcherTable = memo(function SearcherTable({
                                 {isMultiMethod && (
                                     <TableCell>
                                         {
-                                            METHODS_EN[
+                                            METHODS[lang][
                                                 (
                                                     row as ExtendedWildSearcherState
                                                 ).method
@@ -97,11 +98,12 @@ const SearcherTable = memo(function SearcherTable({
                                                 .encounterSlot
                                         }
                                         :{" "}
-                                        {getNameEn(
+                                        {getName(
                                             (row as ExtendedWildSearcherState)
                                                 .species,
                                             (row as ExtendedWildSearcherState)
-                                                .form
+                                                .form,
+                                            lang
                                         )}
                                     </TableCell>
                                 )}
@@ -114,18 +116,18 @@ const SearcherTable = memo(function SearcherTable({
                                     </TableCell>
                                 )}
                                 <TableCell>{hexSeed(row.pid, 32)}</TableCell>
-                                <TableCell>{SHININESS_EN[row.shiny]}</TableCell>
-                                <TableCell>{NATURES_EN[row.nature]}</TableCell>
+                                <TableCell>{SHININESS[lang][row.shiny]}</TableCell>
+                                <TableCell>{NATURES[lang][row.nature]}</TableCell>
                                 <TableCell>
                                     {row.ability}:{" "}
-                                    {ABILITIES_EN[row.abilityIndex - 1]}
+                                    {ABILITIES[lang][row.abilityIndex - 1]}
                                 </TableCell>
                                 <TableCell>{row.ivs.join("/")}</TableCell>
                                 <TableCell>
-                                    {TYPES_EN[row.hiddenPower]}
+                                    {TYPES[lang][row.hiddenPower]}
                                 </TableCell>
                                 <TableCell>{row.hiddenPowerStrength}</TableCell>
-                                <TableCell>{GENDERS_EN[row.gender]}</TableCell>
+                                <TableCell>{GENDERS[row.gender]}</TableCell>
 
                                 <TableCell>
                                     <Button

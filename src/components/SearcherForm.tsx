@@ -4,6 +4,7 @@ import { Box, Button, MenuItem, TextField } from "@mui/material";
 
 import fetchTenLines, {
     COMBINED_WILD_METHOD,
+    getLanguage,
     SEED_IDENTIFIER_TO_GAME,
     STATIC_2,
     STATIC_4,
@@ -16,10 +17,10 @@ import {
 } from "../tenLines/generated";
 import React from "react";
 import {
-    GENDERS_EN,
-    METHODS_EN,
-    NATURES_EN,
-    TYPES_EN,
+    GENDERS,
+    METHODS,
+    NATURES,
+    TYPES,
 } from "../tenLines/resources";
 import IvEntry from "./IvEntry";
 import StaticEncounterSelector from "./StaticEncounterSelector";
@@ -76,6 +77,7 @@ export default function CalibrationForm({
     sx?: any;
     hidden?: boolean;
 }) {
+    const lang = getLanguage();
     const [searcherFormState, setSearcherFormState] =
         useState<SearcherFormState>({
             shininess: 255,
@@ -279,7 +281,7 @@ export default function CalibrationForm({
                 select
                 fullWidth
             >
-                {Object.entries(METHODS_EN)
+                {Object.entries(METHODS[lang])
                     .filter(([value, _name]) => parseInt(value) != STATIC_2)
                     .map(([value, name], index) => (
                         <MenuItem key={index} value={parseInt(value)}>
@@ -362,7 +364,7 @@ export default function CalibrationForm({
                 fullWidth
             >
                 <MenuItem value="-1">Any</MenuItem>
-                {NATURES_EN.map((nature, index) => (
+                {NATURES[lang].map((nature, index) => (
                     <MenuItem key={index} value={index}>
                         {nature}
                     </MenuItem>
@@ -383,7 +385,7 @@ export default function CalibrationForm({
                 fullWidth
             >
                 <MenuItem value="255">Any</MenuItem>
-                {GENDERS_EN.slice(0, 2).map((gender, index) => (
+                {GENDERS.slice(0, 2).map((gender, index) => (
                     <MenuItem key={index} value={index}>
                         {gender}
                     </MenuItem>
@@ -404,7 +406,7 @@ export default function CalibrationForm({
                 fullWidth
             >
                 <MenuItem value="-1">Any</MenuItem>
-                {TYPES_EN.map((type, index) => (
+                {TYPES[lang].map((type, index) => (
                     <MenuItem key={index} value={index}>
                         {type}
                     </MenuItem>

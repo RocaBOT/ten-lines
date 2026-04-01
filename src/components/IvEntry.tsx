@@ -44,7 +44,8 @@ function IvEntry({
     return (
         <React.Fragment>
             <RangeInput
-                label="HP"
+                label_min="Minimum HP"
+                label_max="Maximum HP"
                 name="hpRange"
                 onChange={(event, value) => handleChange(0, event, value)}
                 value={value[0]}
@@ -53,7 +54,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label="Attack"
+                label_min="Minimum Attack"
+                label_max="Maximum Attack"
                 name="atkRange"
                 onChange={(event, value) => handleChange(1, event, value)}
                 value={value[1]}
@@ -62,7 +64,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label="Defense"
+                label_min="Minimum Defense"
+                label_max="Maximum Defense"
                 name="defRange"
                 onChange={(event, value) => handleChange(2, event, value)}
                 value={value[2]}
@@ -71,7 +74,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label="Special Attack"
+                label_min="Minimum Special Attack"
+                label_max="Maximum Special Attack"
                 name="spaRange"
                 onChange={(event, value) => handleChange(3, event, value)}
                 value={value[3]}
@@ -80,7 +84,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label="Special Defense"
+                label_min="Minimum Special Defense"
+                label_max="Maximum Special Defense"
                 name="spdRange"
                 onChange={(event, value) => handleChange(4, event, value)}
                 value={value[4]}
@@ -89,7 +94,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label="Speed"
+                label_min="Minimum Speed"
+                label_max="Maximum Speed"
                 name="speRange"
                 onChange={(event, value) => handleChange(5, event, value)}
                 value={value[5]}

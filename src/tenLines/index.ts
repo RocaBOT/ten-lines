@@ -1,6 +1,7 @@
 import { wrap, type Remote } from "comlink";
 import type { MainModule } from "./generated";
 import Worker from "./worker?worker";
+import { useSearchParams } from "react-router-dom";
 
 export const Game = {
     None: 0,
@@ -72,6 +73,8 @@ const SEED_URLS: Record<string, string> = {
     lg_mgba: "generated/lg_eng_mgba.bin",
 };
 
+const langList = ["FR", "EN"];
+
 export async function fetchSeedData(game: string): Promise<Uint8Array> {
     const response = await fetch(SEED_URLS[game]);
     if (!response.ok) {
@@ -103,12 +106,14 @@ export function frameToMS(frame: number, system: string) {
 
 export function teachyTVConversion(
     advances: number,
-    minimum_advances_out: number
+    minimum_advances_out: number,
+    wireless_adapter: boolean
 ) {
-    const target_advances_via_ttv = advances - minimum_advances_out;
-    const ttv_advances = Math.floor(target_advances_via_ttv / 313);
-    const actual_advances_via_ttv = ttv_advances * 313;
-    const regular_advances = advances - actual_advances_via_ttv;
+    const base_advances = wireless_adapter ? 314 : 313;
+    const target_advances_via_ttv = advances - minimum_advances_out * (wireless_adapter ? 2 : 1);
+    const ttv_advances = Math.floor(target_advances_via_ttv / base_advances);
+    const actual_advances_via_ttv = ttv_advances * base_advances;
+    const regular_advances = advances - actual_advances_via_ttv - (wireless_adapter ? minimum_advances_out : 0);
 
     return {
         ttv_advances,
@@ -133,5 +138,12 @@ export function fixGameConsole(game: string, console: string) {
     }
     return console;
 }
+
+export function getLanguage() {
+    const [searchParams] = useSearchParams();
+    if (searchParams.get("lang") && langList.includes(searchParams.get("lang") as string)) return (searchParams.get("lang") as string)
+    return "EN";
+}
+
 
 export default fetchTenLines;

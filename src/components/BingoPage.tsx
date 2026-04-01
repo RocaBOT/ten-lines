@@ -6,8 +6,8 @@ import type {
     ExtendedWildGeneratorState,
     FRLGContiguousSeedEntry,
 } from "../tenLines/generated";
-import fetchTenLines, { hexSeed, SEED_IDENTIFIER_TO_GAME } from "../tenLines";
-import { GENDERS_EN, NATURES_EN } from "../tenLines/resources";
+import fetchTenLines, { getLanguage, hexSeed, SEED_IDENTIFIER_TO_GAME } from "../tenLines";
+import { GENDERS, NATURES } from "../tenLines/resources";
 import type { CalibrationFormState } from "./CalibrationForm";
 import { proxy } from "comlink";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -26,6 +26,8 @@ export function getBingoActive() {
 export async function fetchBingo(
     searchSeeds: FRLGContiguousSeedEntry[],
     advancesRange: number[],
+    ttvAdvancesRange: number[],
+    overworldFrames: string,
     offset: string,
     isStatic: boolean,
     trainerID: string,
@@ -65,9 +67,11 @@ export async function fetchBingo(
         await tenLines.check_seeds_static(
             searchSeeds,
             advancesRange,
-            [0, 0],
+            ttvAdvancesRange,
             parseInt(offset),
             SEED_IDENTIFIER_TO_GAME[game],
+            game.endsWith("nx"),
+            parseInt(overworldFrames),
             parseInt(trainerID),
             parseInt(secretID),
             calibrationFormState.staticCategory,
@@ -91,9 +95,11 @@ export async function fetchBingo(
         await tenLines.check_seeds_wild(
             searchSeeds,
             advancesRange,
-            [0, 0],
+            ttvAdvancesRange,
             parseInt(offset),
             SEED_IDENTIFIER_TO_GAME[game],
+            game.endsWith("nx"),
+            parseInt(overworldFrames),
             parseInt(trainerID),
             parseInt(secretID),
             calibrationFormState.wildCategory,
@@ -164,6 +170,7 @@ export default function BingoPage({
     hidden?: boolean;
 }) {
     const [bingoBoard, _setBingoBoard, counters, setCounters] = useBingoBoard();
+    const lang = getLanguage();
 
     const width = bingoBoard[0]?.length ?? 0;
     const height = bingoBoard.length;
@@ -251,8 +258,8 @@ export default function BingoPage({
                             />
                             <br />
                             <span>
-                                {GENDERS_EN[entry.gender]}{" "}
-                                {NATURES_EN[entry.nature]}
+                                {GENDERS[entry.gender]}{" "}
+                                {NATURES[lang][entry.nature]}
                             </span>
                             <br />
                             <span>{entry.stats.join("/")}</span>

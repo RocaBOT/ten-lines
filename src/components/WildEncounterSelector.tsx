@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import fetchTenLines, { Game } from "../tenLines";
+import fetchTenLines, { Game, getLanguage } from "../tenLines";
 import {
     Autocomplete,
     Box,
@@ -9,7 +9,7 @@ import {
     MenuItem,
     TextField,
 } from "@mui/material";
-import { getLocationEn, getNameEn, NATURES_EN } from "../tenLines/resources";
+import { getLocation, getName, NATURES } from "../tenLines/resources";
 
 function WildEncounterSelector({
     wildCategory,
@@ -38,6 +38,7 @@ function WildEncounterSelector({
     allowAnyPokemon?: boolean;
     isSearcher?: boolean;
 }) {
+    const lang = getLanguage();
     const [wildLocations, setWildLocations] = useState<number[]>([]);
     const [areaSpecies, setAreaSpecies] = useState<number[]>([]);
 
@@ -128,7 +129,7 @@ function WildEncounterSelector({
                     );
                 }}
                 getOptionLabel={(option) =>
-                    getLocationEn(game, wildLocations[option]) || ""
+                    getLocation(game, wildLocations[option], lang) || ""
                 }
                 renderInput={(params) => (
                     <TextField {...params} label="Location" margin="normal" />
@@ -160,7 +161,7 @@ function WildEncounterSelector({
                     {allowAnyPokemon && <MenuItem value="-1">Any</MenuItem>}
                     {areaSpecies.map((speciesForm) => (
                         <MenuItem key={speciesForm} value={speciesForm}>
-                            {getNameEn(speciesForm & 0x7ff, speciesForm >> 11)}
+                            {getName(speciesForm & 0x7ff, speciesForm >> 11, lang)}
                         </MenuItem>
                     ))}
                 </TextField>
@@ -215,7 +216,7 @@ function WildEncounterSelector({
                     {isSearcher ? (
                         <MenuItem value="0">Matching Synchronize</MenuItem>
                     ) : (
-                        NATURES_EN.map((nature, index) => (
+                        NATURES[lang].map((nature, index) => (
                             <MenuItem key={index} value={index}>
                                 {nature} Synchronize
                             </MenuItem>

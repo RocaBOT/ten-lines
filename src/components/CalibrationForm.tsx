@@ -11,17 +11,21 @@ import {
     FormControlLabel,
     MenuItem,
     TextField,
+    Tooltip,
 } from "@mui/material";
+
+import InfoIcon from "@mui/icons-material/Info";
 
 import fetchTenLines, {
     COMBINED_WILD_METHOD,
     fetchSeedData,
     fixGameConsole,
     frameToMS,
+    getLanguage,
     hexSeed,
     SEED_IDENTIFIER_TO_GAME,
     STATIC_2,
-    STATIC_4,
+    STATIC_4
 } from "../tenLines";
 import NumericalInput from "./NumericalInput";
 import RangeInput from "./RangeInput";
@@ -33,7 +37,13 @@ import {
     type FRLGContiguousSeedEntry,
 } from "../tenLines/generated";
 import React from "react";
-import { GENDERS_EN, METHODS_EN, NATURES_EN } from "../tenLines/resources";
+import { 
+    GENDERS, 
+    METHODS, 
+    NATURES, 
+    LABEL,
+    LIST_GAME
+} from "../tenLines/resources";
 import IvEntry from "./IvEntry";
 import IvCalculator from "./IvCalculator";
 import StaticEncounterSelector from "./StaticEncounterSelector";
@@ -93,7 +103,7 @@ function useCalibrationURLState() {
     const overworldFrames = gameConsole.startsWith("NX") ? searchParams.get("overworldFrames") || "600" : "0";
     const trainerID = searchParams.get("trainerID") || "0";
     const secretID = searchParams.get("secretID") || "0";
-    const teachyTVMode = !gameConsole.startsWith("NX") ? searchParams.get("teachyTVMode") || "false" : "false";
+    const teachyTVMode = searchParams.get("teachyTVMode") || "false";
     const targetSeedValue =
         parseInt(searchParams.get("targetInitialSeed") || "DEAD", 16) ?? 0xdead;
     const setCalibrationURLState = (state: Partial<CalibrationURLState>) => {
@@ -180,6 +190,8 @@ export default function CalibrationForm({
         useBingoBoard();
 
     const bingoActive = getBingoActive();
+
+    const lang = getLanguage();
 
     const isStatic = calibrationFormState.method <= STATIC_4;
     const isFRLG = game.startsWith("fr") || game.startsWith("lg");
@@ -314,6 +326,8 @@ export default function CalibrationForm({
                     ttvAdvancesRange,
                     parseInt(offset),
                     SEED_IDENTIFIER_TO_GAME[game],
+                    gameConsole.startsWith("NX"),
+                    parseInt(overworldFrames),
                     parseInt(trainerID),
                     parseInt(secretID),
                     calibrationFormState.staticCategory,
@@ -340,6 +354,8 @@ export default function CalibrationForm({
                     ttvAdvancesRange,
                     parseInt(offset),
                     SEED_IDENTIFIER_TO_GAME[game],
+                    gameConsole.startsWith("NX"),
+                    parseInt(overworldFrames),
                     parseInt(trainerID),
                     parseInt(secretID),
                     calibrationFormState.wildCategory,
@@ -395,7 +411,7 @@ export default function CalibrationForm({
     return (
         <Box component="form" onSubmit={handleSubmit} sx={{ sx }}>
             <TextField
-                label="Game"
+                label={LABEL[lang]["game"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) =>
@@ -407,25 +423,25 @@ export default function CalibrationForm({
                 select
                 fullWidth
             >
-                <MenuItem value="r_painting">Ruby Painting Seed</MenuItem>
-                <MenuItem value="s_painting">Sapphire Painting Seed</MenuItem>
-                <MenuItem value="e_painting">Emerald Painting Seed</MenuItem>
-                <MenuItem value="fr">FireRed (ENG)</MenuItem>
-                <MenuItem value="fr_eu">FireRed (SPA/FRE/ITA/GER)</MenuItem>
-                <MenuItem value="fr_jpn_1_0">FireRed (JPN) (1.0)</MenuItem>
-                <MenuItem value="fr_jpn_1_1">FireRed (JPN) (1.1)</MenuItem>
-                <MenuItem value="fr_nx">Switch FireRed (ENG/SPA/FRE/ITA/GER)</MenuItem>
-                <MenuItem value="fr_mgba">FireRed (ENG) (MGBA 10.5)</MenuItem>
-                <MenuItem value="lg">LeafGreen (ENG)</MenuItem>
-                <MenuItem value="lg_eu">LeafGreen (SPA/FRE/ITA/GER)</MenuItem>
-                <MenuItem value="lg_jpn">LeafGreen (JPN)</MenuItem>
-                <MenuItem value="lg_nx">Switch LeafGreen (ENG/SPA/FRE/ITA/GER)</MenuItem>
-                <MenuItem value="lg_mgba">LeafGreen (ENG) (MGBA 10.5)</MenuItem>
+                <MenuItem value="r_painting">{LIST_GAME[lang]["r_painting"]}</MenuItem>
+                <MenuItem value="s_painting">{LIST_GAME[lang]["s_painting"]}</MenuItem>
+                <MenuItem value="e_painting">{LIST_GAME[lang]["e_painting"]}</MenuItem>
+                <MenuItem value="fr">{LIST_GAME[lang]["fr"]}</MenuItem>
+                <MenuItem value="fr_eu">{LIST_GAME[lang]["fr_eu"]}</MenuItem>
+                <MenuItem value="fr_jpn_1_0">{LIST_GAME[lang]["fr_jpn_1_0"]}</MenuItem>
+                <MenuItem value="fr_jpn_1_1">{LIST_GAME[lang]["fr_jpn_1_1"]}</MenuItem>
+                <MenuItem value="fr_nx">{LIST_GAME[lang]["fr_nx"]}</MenuItem>
+                <MenuItem value="fr_mgba">{LIST_GAME[lang]["fr_mgba"]}</MenuItem>
+                <MenuItem value="lg">{LIST_GAME[lang]["lg"]}</MenuItem>
+                <MenuItem value="lg_eu">{LIST_GAME[lang]["lg_eu"]}</MenuItem>
+                <MenuItem value="lg_jpn">{LIST_GAME[lang]["lg_jpn"]}</MenuItem>
+                <MenuItem value="lg_nx">{LIST_GAME[lang]["lg_nx"]}</MenuItem>
+                <MenuItem value="lg_mgba">{LIST_GAME[lang]["lg_mgba"]}</MenuItem>
             </TextField>
             {isFRLG && (
                 <React.Fragment>
                     <TextField
-                        label="Sound"
+                        label={LABEL[lang]["sound"]}
                         margin="normal"
                         style={{ textAlign: "left" }}
                         onChange={(event) =>
@@ -437,11 +453,11 @@ export default function CalibrationForm({
                         select
                         fullWidth
                     >
-                        <MenuItem value="mono">Mono</MenuItem>
-                        <MenuItem value="stereo">Stereo</MenuItem>
+                        <MenuItem value="mono">{LABEL[lang]["mono"]}</MenuItem>
+                        <MenuItem value="stereo">{LABEL[lang]["stereo"]}</MenuItem>
                     </TextField>
                     <TextField
-                        label="Button Mode"
+                        label={LABEL[lang]["button mode"]}
                         margin="normal"
                         style={{ textAlign: "left" }}
                         onChange={(event) =>
@@ -453,12 +469,12 @@ export default function CalibrationForm({
                         select
                         fullWidth
                     >
-                        <MenuItem value="a">L=A</MenuItem>
-                        <MenuItem value="h">Help</MenuItem>
-                        <MenuItem value="r">LR</MenuItem>
+                        <MenuItem value="a">{LABEL[lang]["l eq a"]}</MenuItem>
+                        <MenuItem value="h">{LABEL[lang]["help"]}</MenuItem>
+                        <MenuItem value="r">{LABEL[lang]["lr"]}</MenuItem>
                     </TextField>
                     <TextField
-                        label="Seed Button"
+                        label={LABEL[lang]["seed button"]}
                         margin="normal"
                         style={{ textAlign: "left" }}
                         onChange={(event) =>
@@ -475,7 +491,7 @@ export default function CalibrationForm({
                         <MenuItem value="l">L (L=A)</MenuItem>
                     </TextField>
                     <TextField
-                        label="Extra Button"
+                        label={LABEL[lang]["extra button"]}
                         margin="normal"
                         style={{ textAlign: "left" }}
                         onChange={(event) =>
@@ -487,21 +503,19 @@ export default function CalibrationForm({
                         select
                         fullWidth
                     >
-                        <MenuItem value="none">None</MenuItem>
-                        <MenuItem value="startup_select">
-                            Startup Select
-                        </MenuItem>
-                        <MenuItem value="startup_a">Startup A</MenuItem>
-                        <MenuItem value="blackout_r">Blackout R</MenuItem>
-                        <MenuItem value="blackout_a">Blackout A</MenuItem>
-                        <MenuItem value="blackout_l">Blackout L</MenuItem>
-                        <MenuItem value="blackout_al">Blackout A+L</MenuItem>
+                        <MenuItem value="none">{LABEL[lang]["none"]}</MenuItem>
+                        <MenuItem value="startup_select">{LABEL[lang]["startup select"]}</MenuItem>
+                        <MenuItem value="startup_a">{LABEL[lang]["startup a"]}</MenuItem>
+                        <MenuItem value="blackout_r">{LABEL[lang]["blackout r"]}</MenuItem>
+                        <MenuItem value="blackout_a">{LABEL[lang]["blackout a"]}</MenuItem>
+                        <MenuItem value="blackout_l">{LABEL[lang]["blackout l"]}</MenuItem>
+                        <MenuItem value="blackout_al">{LABEL[lang]["blackout a+l"]}</MenuItem>
                     </TextField>
                 </React.Fragment>
             )}
 
             <TextField
-                label="Console"
+                label={LABEL[lang]["console"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) =>
@@ -544,12 +558,12 @@ export default function CalibrationForm({
                 renderInput={(params) => (
                     <TextField
                         {...params}
-                        label="Target Seed"
+                        label={LABEL[lang]["target seed"]}
                         margin="normal"
                         error={seedList.length === 0}
                         helperText={
                             seedList.length === 0
-                                ? "No known seeds for this game & settings"
+                                ? LABEL[lang]["no seed for settings"]
                                 : undefined
                         }
                     />
@@ -561,7 +575,7 @@ export default function CalibrationForm({
             />
             <Box sx={{ flexDirection: "row", display: "flex" }}>
                 <NumericalInput
-                    label="Seed +/-"
+                    label={LABEL[lang]["seed +/-"]}
                     margin="normal"
                     onChange={(_event, value) => {
                         setCalibrationFormState((data) => ({
@@ -585,7 +599,7 @@ export default function CalibrationForm({
                         setSeedDialogOpen(true);
                     }}
                 >
-                    Show Seeds
+                    {LABEL[lang]["show seeds"]}
                 </Button>
                 <Dialog
                     open={seedDialogOpen}
@@ -613,8 +627,11 @@ export default function CalibrationForm({
                 </Dialog>
             </Box>
             <RangeInput
-                label={isTeachyTVMode ? "Final A Press Frame" : "Advances"}
+                label_min={LABEL[lang]["final a press frame min"]}
+                label_max={LABEL[lang]["final a press frame max"]}
+                infotext={LABEL[lang]["total time"]}
                 name="advancesRange"
+                sx={{flexGrow: 1}}
                 onChange={(_event, value) => {
                     setCalibrationURLState({
                         advancesMin: value.value[0],
@@ -627,7 +644,7 @@ export default function CalibrationForm({
                 maximumValue={4294967295}
             />
             <NumericalInput
-                label="Offset"
+                label={LABEL[lang]["offset"]}
                 name="offset"
                 minimumValue={0}
                 maximumValue={4294967295}
@@ -639,10 +656,38 @@ export default function CalibrationForm({
                 }}
                 value={offset}
             ></NumericalInput>
+            {isSwitch && (
+                <Box sx={{ flexDirection: "row", display: "flex" }}>
+                    <span
+                        style={{
+                            margin: "30px 10px",
+                            alignSelf: "left",
+                        }}
+                    >
+                        <Tooltip title={LABEL[lang]["main timer final phase"]}><InfoIcon fontSize="large"/></Tooltip>
+                    </span>
+                    <NumericalInput
+                        label={LABEL[lang]["req ow frames"]}
+                        name="overworldFrames"
+                        minimumValue={0}
+                        maximumValue={4294967295}
+                        onChange={(_, value) => {
+                            setCalibrationURLState({
+                                overworldFrames: value.value,
+                            });
+                            setOverworldFramesIsValid(value.isValid);
+                        }}
+                        value={overworldFrames}
+                    ></NumericalInput>
+                </Box>
+            )}
             {isTeachyTVMode && (
                 <RangeInput
-                    label="TeachyTV Advances"
+                    label_min={LABEL[lang]["ttv advances min"]}
+                    label_max={LABEL[lang]["ttv advances max"]}
+                    infotext={LABEL[lang]["ttv timer"]}
                     name="ttvRange"
+                    sx={{width: '100%'}}
                     onChange={(_event, value) => {
                         setCalibrationURLState({
                             ttvAdvancesMin: value.value[0],
@@ -655,20 +700,7 @@ export default function CalibrationForm({
                     maximumValue={4294967295}
                 />
             )}
-            {isSwitch && (<NumericalInput
-                label="Required Overworld Frames"
-                name="overworldFrames"
-                minimumValue={0}
-                maximumValue={4294967295}
-                onChange={(_, value) => {
-                    setCalibrationURLState({
-                        overworldFrames: value.value,
-                    });
-                    setOverworldFramesIsValid(value.isValid);
-                }}
-                value={overworldFrames}
-            ></NumericalInput>)}
-            {isFRLG && !isSwitch && (
+            {isFRLG && (
                 <FormControlLabel
                     control={
                         <Checkbox
@@ -680,7 +712,7 @@ export default function CalibrationForm({
                             }}
                         />
                     }
-                    label="TeachyTV Mode"
+                    label={LABEL[lang]["ttv mode"]}
                 />
             )}
             <Box sx={{ flexDirection: "row", display: "flex" }}>
@@ -733,7 +765,7 @@ export default function CalibrationForm({
                 select
                 fullWidth
             >
-                {Object.entries(METHODS_EN)
+                {Object.entries(METHODS[lang])
                     .filter(([value, _name]) => parseInt(value) != STATIC_2)
                     .map(([value, name], index) => (
                         <MenuItem key={index} value={parseInt(value)}>
@@ -817,7 +849,7 @@ export default function CalibrationForm({
                 fullWidth
             >
                 <MenuItem value="-1">Any</MenuItem>
-                {NATURES_EN.map((nature, index) => (
+                {NATURES[lang].map((nature, index) => (
                     <MenuItem key={index} value={index}>
                         {nature}
                     </MenuItem>
@@ -838,7 +870,7 @@ export default function CalibrationForm({
                 fullWidth
             >
                 <MenuItem value="255">Any</MenuItem>
-                {GENDERS_EN.slice(0, 2).map((gender, index) => (
+                {GENDERS.slice(0, 2).map((gender, index) => (
                     <MenuItem key={index} value={index}>
                         {gender}
                     </MenuItem>
@@ -914,6 +946,8 @@ export default function CalibrationForm({
                         fetchBingo(
                             searchSeeds,
                             advancesRange,
+                            ttvAdvancesRange,
+                            overworldFrames,
                             offset,
                             isStatic,
                             trainerID,
@@ -951,6 +985,7 @@ export default function CalibrationForm({
                 isMultiMethod={
                     calibrationFormState.method == COMBINED_WILD_METHOD
                 }
+                lang={lang}
             />
         </Box>
     );

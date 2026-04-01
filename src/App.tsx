@@ -64,6 +64,14 @@ function TenLinesPages() {
             </Box>
 
             <footer>
+                THIS IS A FORK FOR TESTING PURPOSES ONLY. WE DO NOT OFFER SUPPORT. DO NOT USE.
+                <br />
+                Go to{" "}
+                <a href="https://lincoln-lm.github.io/ten-lines/">
+                    lincoln-lm's page 
+                </a>
+                {" "}for the supported version of Ten Lines.
+                <br />
                 Original "10 lines" was created by Shao, FRLG seeds farmed by
                 blisy, po, HunarPG, 10Ben, Real96, Papa Jef&eacute;, and トノ
                 <br />

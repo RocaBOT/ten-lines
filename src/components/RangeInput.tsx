@@ -1,18 +1,23 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Tooltip } from "@mui/material";
 import { useState } from "react";
 import NumericalInput from "./NumericalInput";
+import InfoIcon from "@mui/icons-material/Info";
+
 
 function RangeInput({
-    label,
+    label_min,
+    label_max,
     name,
     value,
     minimumValue,
     maximumValue,
     onChange,
     resetButton = false,
+    infotext,
     ...props
 }: {
-    label: string;
+    label_min: string;
+    label_max: string;
     name: string;
     value: [string, string];
     minimumValue: number;
@@ -25,6 +30,7 @@ function RangeInput({
         }
     ) => void;
     resetButton?: boolean;
+    infotext?: string;
     [key: string]: any;
 }) {
     const [minValid, setMinValid] = useState(true);
@@ -62,8 +68,16 @@ function RangeInput({
 
     return (
         <Box sx={{ display: "flex" }}>
+            {(infotext?.length) && <span
+                    style={{
+                        margin: "25px 10px",
+                        alignSelf: "left",
+                    }}
+                >
+                    <Tooltip title={infotext}><InfoIcon fontSize="large"/></Tooltip>
+                </span>}
             <NumericalInput
-                label={`Minimum ${label}`}
+                label={`${label_min}`}
                 name={name}
                 minimumValue={minimumValue}
                 maximumValue={maxValid ? parseInt(value[1]) : maximumValue}
@@ -80,7 +94,7 @@ function RangeInput({
                 -
             </span>
             <NumericalInput
-                label={`Maximum ${label}`}
+                label={`${label_max}`}
                 name={name}
                 minimumValue={minValid ? parseInt(value[0]) : minimumValue}
                 maximumValue={maximumValue}

@@ -57,6 +57,8 @@ void check_seeds_static(
     emscripten::typed_range<u32> ttv_advances_range,
     u32 offset,
     Game game,
+    bool wireless_adapter,
+    u32 overworldFrames,
     u16 trainer_id,
     u16 secret_id,
     int category,
@@ -72,8 +74,11 @@ void check_seeds_static(
     // in TTV mode this refers to the visual frame you trigger the encounter on
     // in normal mode this refers to the rng advance you trigger the encounter on
     // for the sake of timing, this is also treated as the final frame
-    u32 starting_final_frame = advances_range.min();
-    u32 ending_final_frame = advances_range.max();
+    // On Switch (or when using the wireless adapter), account for the doubled
+    // advances while in the overworld (it is supposed that the user does not have
+    // the mystery gift menu active, or that they know what they are doing if they do)
+    u32 starting_final_frame = advances_range.min() + overworldFrames;
+    u32 ending_final_frame = advances_range.max() + overworldFrames;
     u32 initial_ttv_advances = ttv_advances_range.min();
     u32 ending_ttv_advances = std::min(ttv_advances_range.max(), ending_final_frame);
 
@@ -101,13 +106,13 @@ void check_seeds_static(
             // final frame = frames spent in ttv + frames spent outside of ttv
             // for the sake of timing, = ttv advances + regular advances
             // (if ttv mode is off, ttv advances are always 0 and regular advances = final frame)
-
             // subtract ttv advances from final frame to determine regular advance range
             u32 starting_advances = starting_final_frame > ttv_advances ? starting_final_frame - ttv_advances : 0;
             u32 ending_advances = ending_final_frame > ttv_advances ? ending_final_frame - ttv_advances : 0;
             u32 max_advances = ending_advances - starting_advances;
 
-            // ttv advances cause 313 regular advances
+            // ttv advances cause 313 regular advances (2x2 mode for switch/wireless adapter already 
+            // accounted for at start of function)
             StaticGenerator3 generator(
                 starting_advances + ttv_advances * 313,
                 max_advances,
@@ -132,6 +137,8 @@ void check_seeds_wild(
     emscripten::typed_range<u32> ttv_advances_range,
     u32 offset,
     Game game,
+    bool wireless_adapter,
+    u32 overworldFrames,
     u16 trainer_id,
     u16 secret_id,
     Encounter encounter_category,
@@ -146,8 +153,14 @@ void check_seeds_wild(
     emscripten::callback<void(emscripten::typed_array<ExtendedWildGeneratorState>)> result_callback,
     emscripten::callback<void(bool)> searching_callback)
 {
-    u32 starting_final_frame = advances_range.min();
-    u32 ending_final_frame = advances_range.max();
+    // in TTV mode this refers to the visual frame you trigger the encounter on
+    // in normal mode this refers to the rng advance you trigger the encounter on
+    // for the sake of timing, this is also treated as the final frame
+    // On Switch (or when using the wireless adapter), account for the doubled
+    // advances while in the overworld (it is supposed that the user does not have
+    // the mystery gift menu active, or that they know what they are doing if they do)
+    u32 starting_final_frame = advances_range.min() + overworldFrames;
+    u32 ending_final_frame = advances_range.max() + overworldFrames;
     u32 initial_ttv_advances = ttv_advances_range.min();
     u32 ending_ttv_advances = std::min(ttv_advances_range.max(), ending_final_frame);
 
@@ -178,6 +191,8 @@ void check_seeds_wild(
             u32 max_advances = ending_advances - starting_advances;
 
             for (Method m : methods) {
+                // ttv advances cause 313 regular advances (2x2 mode for switch/wireless adapter already 
+                // accounted for at start of function)
                 WildGenerator3 generator(
                     starting_advances + ttv_advances * 313,
                     max_advances,
