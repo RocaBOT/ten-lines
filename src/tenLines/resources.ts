@@ -209,6 +209,7 @@ export const LABEL: Record<string, Record<string, string>> = {
         "search all natures": "IV Calculation disabled. Searching all Natures.",
         "searching": "Searching...",
         "submit": "Submit",
+        "nature help text": "Required for IV calculation",
     },
     "FR": {
         "game": "Jeu",
@@ -273,6 +274,7 @@ export const LABEL: Record<string, Record<string, string>> = {
         "search all natures": "Calcul d'IV désactivé. Recherche pour toutes les Natures.",
         "searching": "Recherche...",
         "submit": "Envoyer",
+        "nature help text": "Required for IV calculation",
     }
 }
 

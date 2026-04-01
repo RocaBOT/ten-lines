@@ -840,7 +840,7 @@ export default function CalibrationForm({
                 select
                 fullWidth
             >
-                <MenuItem value="-1">Any</MenuItem>
+                <MenuItem value="-1">{LABEL[lang]["any"]}</MenuItem>
                 {NATURES[lang].map((nature, index) => (
                     <MenuItem key={index} value={index}>
                         {nature}
