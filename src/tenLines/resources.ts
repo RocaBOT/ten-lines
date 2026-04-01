@@ -274,7 +274,7 @@ export const LABEL: Record<string, Record<string, string>> = {
         "search all natures": "Calcul d'IV désactivé. Recherche pour toutes les Natures.",
         "searching": "Recherche...",
         "submit": "Envoyer",
-        "nature help text": "Required for IV calculation",
+        "nature help text": "Requis pour le calcul d'IV",
     }
 }
 
