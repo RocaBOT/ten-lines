@@ -717,7 +717,7 @@ export default function CalibrationForm({
             )}
             <Box sx={{ flexDirection: "row", display: "flex" }}>
                 <NumericalInput
-                    label="Trainer ID"
+                    label={LABEL[lang]["trainer id"]}
                     margin="normal"
                     onChange={(_event, value) => {
                         setCalibrationURLState({ trainerID: value.value });
@@ -738,7 +738,7 @@ export default function CalibrationForm({
                     /
                 </span>
                 <NumericalInput
-                    label="Secret ID"
+                    label={LABEL[lang]["secret id"]}
                     margin="normal"
                     onChange={(_event, value) => {
                         setCalibrationURLState({ secretID: value.value });
@@ -752,7 +752,7 @@ export default function CalibrationForm({
                 />
             </Box>
             <TextField
-                label="Method"
+                label={LABEL[lang]["method"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) => {
@@ -816,7 +816,7 @@ export default function CalibrationForm({
                 />
             )}
             <TextField
-                label="Shininess"
+                label={LABEL[lang]["shininess"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) => {
@@ -829,13 +829,13 @@ export default function CalibrationForm({
                 select
                 fullWidth
             >
-                <MenuItem value="255">Any</MenuItem>
-                <MenuItem value="1">Star</MenuItem>
-                <MenuItem value="2">Square</MenuItem>
-                <MenuItem value="3">Star/Square</MenuItem>
+                <MenuItem value="255">{LABEL[lang]["any"]}</MenuItem>
+                <MenuItem value="1">{LABEL[lang]["star"]}</MenuItem>
+                <MenuItem value="2">{LABEL[lang]["square"]}</MenuItem>
+                <MenuItem value="3">{LABEL[lang]["star/square"]}</MenuItem>
             </TextField>
             <TextField
-                label="Nature"
+                label={LABEL[lang]["nature"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) => {
@@ -856,7 +856,7 @@ export default function CalibrationForm({
                 ))}
             </TextField>
             <TextField
-                label="Gender"
+                label={LABEL[lang]["gender"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) => {
@@ -869,7 +869,7 @@ export default function CalibrationForm({
                 select
                 fullWidth
             >
-                <MenuItem value="255">Any</MenuItem>
+                <MenuItem value="255">{LABEL[lang]["any"]}</MenuItem>
                 {GENDERS.slice(0, 2).map((gender, index) => (
                     <MenuItem key={index} value={index}>
                         {gender}
@@ -927,7 +927,7 @@ export default function CalibrationForm({
                     />
                 </React.Fragment>
             ) : (
-                <span>IV Calculation disabled. Searching all Natures.</span>
+                <span>{LABEL[lang]["search all natures"]}</span>
             )}
             {bingoActive && (
                 <Button
@@ -972,7 +972,7 @@ export default function CalibrationForm({
                 sx={{ my: 0.5 }}
                 fullWidth
             >
-                {searching ? "Searching..." : "Submit"}
+                {searching ? LABEL[lang]["searching"] : LABEL[lang]["submit"]}
             </Button>
             <CalibrationTable
                 rows={rows}

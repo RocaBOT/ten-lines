@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import fetchTenLines, { Game, getLanguage } from "../tenLines";
+import { LABEL } from "../tenLines/resources";
 import {
     Autocomplete,
     Box,
@@ -94,7 +95,7 @@ function WildEncounterSelector({
     return (
         <React.Fragment>
             <TextField
-                label="Category"
+                label={LABEL[lang]["category"]}
                 margin="normal"
                 style={{ textAlign: "left" }}
                 onChange={(event) => {
@@ -110,12 +111,12 @@ function WildEncounterSelector({
                 select
                 fullWidth
             >
-                <MenuItem value="0">Grass</MenuItem>
-                <MenuItem value="3">Rock Smash</MenuItem>
-                <MenuItem value="4">Surfing</MenuItem>
-                <MenuItem value="6">Old Rod</MenuItem>
-                <MenuItem value="7">Good Rod</MenuItem>
-                <MenuItem value="8">Super Rod</MenuItem>
+                <MenuItem value="0">{LABEL[lang]["grass"]}</MenuItem>
+                <MenuItem value="3">{LABEL[lang]["rock smash"]}</MenuItem>
+                <MenuItem value="4">{LABEL[lang]["surfing"]}</MenuItem>
+                <MenuItem value="6">{LABEL[lang]["old rod"]}</MenuItem>
+                <MenuItem value="7">{LABEL[lang]["good rod"]}</MenuItem>
+                <MenuItem value="8">{LABEL[lang]["super rod"]}</MenuItem>
             </TextField>
             <Autocomplete
                 options={wildLocations.map((_, index) => index)}
@@ -132,7 +133,7 @@ function WildEncounterSelector({
                     getLocation(game, wildLocations[option], lang) || ""
                 }
                 renderInput={(params) => (
-                    <TextField {...params} label="Location" margin="normal" />
+                    <TextField {...params} label={LABEL[lang]["location"]} margin="normal" />
                 )}
                 value={wildLocation}
                 disablePortal
@@ -158,7 +159,7 @@ function WildEncounterSelector({
                     select
                     fullWidth
                 >
-                    {allowAnyPokemon && <MenuItem value="-1">Any</MenuItem>}
+                    {allowAnyPokemon && <MenuItem value="-1">{LABEL[lang]["any"]}</MenuItem>}
                     {areaSpecies.map((speciesForm) => (
                         <MenuItem key={speciesForm} value={speciesForm}>
                             {getName(speciesForm & 0x7ff, speciesForm >> 11, lang)}
@@ -182,7 +183,7 @@ function WildEncounterSelector({
                                 }}
                             />
                         }
-                        label="Filter"
+                        label={LABEL[lang]["filter"]}
                         sx={{
                             whiteSpace: "nowrap",
                         }}
@@ -191,7 +192,7 @@ function WildEncounterSelector({
             </Box>
             {isEmerald && (
                 <TextField
-                    label="Lead"
+                    label={LABEL[lang]["lead"]}
                     margin="normal"
                     style={{ textAlign: "left" }}
                     onChange={(event) => {
@@ -207,18 +208,18 @@ function WildEncounterSelector({
                     select
                     fullWidth
                 >
-                    <MenuItem value="255">None</MenuItem>
-                    <MenuItem value="25">Female Cute Charm</MenuItem>
-                    <MenuItem value="26">Male Cute Charm</MenuItem>
-                    <MenuItem value="27">Magnet Pull</MenuItem>
-                    <MenuItem value="28">Static</MenuItem>
-                    <MenuItem value="32">Hustle/Pressure/Vital Spirit</MenuItem>
+                    <MenuItem value="255">{LABEL[lang]["none"]}</MenuItem>
+                    <MenuItem value="25">{LABEL[lang]["female cute charm"]}</MenuItem>
+                    <MenuItem value="26">{LABEL[lang]["male cute charm"]}</MenuItem>
+                    <MenuItem value="27">{LABEL[lang]["magnet pull"]}</MenuItem>
+                    <MenuItem value="28">{LABEL[lang]["static"]}</MenuItem>
+                    <MenuItem value="32">{LABEL[lang]["hpvs"]}</MenuItem>
                     {isSearcher ? (
-                        <MenuItem value="0">Matching Synchronize</MenuItem>
+                        <MenuItem value="0">{LABEL[lang]["matching synchronize"]}</MenuItem>
                     ) : (
                         NATURES[lang].map((nature, index) => (
                             <MenuItem key={index} value={index}>
-                                {nature} Synchronize
+                                {nature} {LABEL[lang]["synchronize"]}
                             </MenuItem>
                         ))
                     )}
