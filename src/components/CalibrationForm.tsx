@@ -629,7 +629,7 @@ export default function CalibrationForm({
             <RangeInput
                 label_min={LABEL[lang]["final a press frame min"]}
                 label_max={LABEL[lang]["final a press frame max"]}
-                infotext={LABEL[lang]["total time"]}
+                helperText={LABEL[lang]["total time"]}
                 name="advancesRange"
                 sx={{flexGrow: 1}}
                 onChange={(_event, value) => {
@@ -657,35 +657,26 @@ export default function CalibrationForm({
                 value={offset}
             ></NumericalInput>
             {isSwitch && (
-                <Box sx={{ flexDirection: "row", display: "flex" }}>
-                    <span
-                        style={{
-                            margin: "30px 10px",
-                            alignSelf: "left",
-                        }}
-                    >
-                        <Tooltip title={LABEL[lang]["main timer final phase"]}><InfoIcon fontSize="large"/></Tooltip>
-                    </span>
-                    <NumericalInput
-                        label={LABEL[lang]["req ow frames"]}
-                        name="overworldFrames"
-                        minimumValue={0}
-                        maximumValue={4294967295}
-                        onChange={(_, value) => {
-                            setCalibrationURLState({
-                                overworldFrames: value.value,
-                            });
-                            setOverworldFramesIsValid(value.isValid);
-                        }}
-                        value={overworldFrames}
-                    ></NumericalInput>
-                </Box>
+                <NumericalInput
+                    label={LABEL[lang]["req ow frames"]}
+                    helperText={LABEL[lang]["main timer final phase"]}
+                    name="overworldFrames"
+                    minimumValue={0}
+                    maximumValue={4294967295}
+                    onChange={(_, value) => {
+                        setCalibrationURLState({
+                            overworldFrames: value.value,
+                        });
+                        setOverworldFramesIsValid(value.isValid);
+                    }}
+                    value={overworldFrames}
+                ></NumericalInput>
             )}
             {isTeachyTVMode && (
                 <RangeInput
                     label_min={LABEL[lang]["ttv advances min"]}
                     label_max={LABEL[lang]["ttv advances max"]}
-                    infotext={LABEL[lang]["ttv timer"]}
+                    helperText={LABEL[lang]["ttv timer"]}
                     name="ttvRange"
                     sx={{width: '100%'}}
                     onChange={(_event, value) => {
@@ -845,7 +836,7 @@ export default function CalibrationForm({
                     }));
                 }}
                 value={calibrationFormState.nature}
-                helperText="Required for IV calculation"
+                helperText={LABEL[lang]["nature help text"]}
                 select
                 fullWidth
             >
