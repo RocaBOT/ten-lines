@@ -91,7 +91,10 @@ function TenLinesPages() {
                     margin="normal"
                     style={{ textAlign: "left" }}
                     onChange={(event) => {
-                        setSearchParams({ lang: event.target.value });
+                        setSearchParams((prev) => {
+                            prev.set("lang", event.target.value);
+                            return prev;
+                        });
                     }}
                     value={lang}
                     select
