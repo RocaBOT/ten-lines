@@ -423,6 +423,7 @@ export default function CalibrationForm({
                     }));
                 }}
                 value={searcherFormState.ivRangeStrings}
+                lang={lang}
             />
             <Button
                 variant="contained"

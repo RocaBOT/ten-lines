@@ -1,16 +1,19 @@
 import { useState } from "react";
 import RangeInput from "./RangeInput";
 import React from "react";
+import { LABEL } from "../tenLines/resources";
 
 function IvEntry({
     value,
     onChange,
+    lang
 }: {
     value: [string, string][];
     onChange: (
         event: React.ChangeEvent<HTMLInputElement>,
         value: { value: [string, string][]; isValid: boolean }
     ) => void;
+    lang: string;
 }) {
     const [ivRangeVailidities, setIvRangeVailidities] = useState([
         true,
@@ -44,8 +47,8 @@ function IvEntry({
     return (
         <React.Fragment>
             <RangeInput
-                label_min="Minimum HP"
-                label_max="Maximum HP"
+                label_min={LABEL[lang]["min hp"]}
+                label_max={LABEL[lang]["max hp"]}
                 name="hpRange"
                 onChange={(event, value) => handleChange(0, event, value)}
                 value={value[0]}
@@ -54,8 +57,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label_min="Minimum Attack"
-                label_max="Maximum Attack"
+                label_min={LABEL[lang]["min atk"]}
+                label_max={LABEL[lang]["max atk"]}
                 name="atkRange"
                 onChange={(event, value) => handleChange(1, event, value)}
                 value={value[1]}
@@ -64,8 +67,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label_min="Minimum Defense"
-                label_max="Maximum Defense"
+                label_min={LABEL[lang]["min def"]}
+                label_max={LABEL[lang]["max def"]}
                 name="defRange"
                 onChange={(event, value) => handleChange(2, event, value)}
                 value={value[2]}
@@ -74,8 +77,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label_min="Minimum Special Attack"
-                label_max="Maximum Special Attack"
+                label_min={LABEL[lang]["min spa"]}
+                label_max={LABEL[lang]["max spa"]}
                 name="spaRange"
                 onChange={(event, value) => handleChange(3, event, value)}
                 value={value[3]}
@@ -84,8 +87,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label_min="Minimum Special Defense"
-                label_max="Maximum Special Defense"
+                label_min={LABEL[lang]["min spd"]}
+                label_max={LABEL[lang]["max spd"]}
                 name="spdRange"
                 onChange={(event, value) => handleChange(4, event, value)}
                 value={value[4]}
@@ -94,8 +97,8 @@ function IvEntry({
                 resetButton
             />
             <RangeInput
-                label_min="Minimum Speed"
-                label_max="Maximum Speed"
+                label_min={LABEL[lang]["min spe"]}
+                label_max={LABEL[lang]["max spe"]}
                 name="speRange"
                 onChange={(event, value) => handleChange(5, event, value)}
                 value={value[5]}

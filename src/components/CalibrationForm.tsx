@@ -903,6 +903,7 @@ export default function CalibrationForm({
                             );
                         }}
                         value={calibrationFormState.ivCalculatorText}
+                        lang={lang}
                     />
                     <IvEntry
                         onChange={(_event, value) => {
@@ -913,6 +914,7 @@ export default function CalibrationForm({
                             }));
                         }}
                         value={calibrationFormState.ivRangeStrings}
+                        lang={lang}
                     />
                 </React.Fragment>
             ) : (
