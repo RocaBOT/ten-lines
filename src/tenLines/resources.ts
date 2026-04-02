@@ -276,7 +276,7 @@ export const LABEL: Record<string, Record<string, string>> = {
         "invalid spd": "Invalid Special Defense",
         "missing spe": "Missing Speed",
         "invalid spe": "Invalid Speed",
-        "no pissible iv 1": "No Possible",
+        "no possible iv 1": "No Possible",
         "no possible iv 2": "IV"
     },
     "FR": {
@@ -409,7 +409,7 @@ export const LABEL: Record<string, Record<string, string>> = {
         "invalid spd": "Défense Spéciale invalide",
         "missing spe": "Vitesse manquante",
         "invalid spe": "Vitesse invalide",
-        "no pissible iv 1": "Aucun IV",
+        "no possible iv 1": "Aucun IV",
         "no possible iv 2": "possble"
     }
 }
