@@ -93,7 +93,7 @@ function useCalibrationURLState() {
     const heldButton = searchParams.get("heldButton") || "none";
     const gameConsole = fixGameConsole(game, searchParams.get("gameConsole") || "GBA");
     const advancesMin = searchParams.get("advancesMin") || "0";
-    const advancesMax = searchParams.get("advancesMax") || "100";
+    const advancesMax = searchParams.get("advancesMax") || "1000";
     const ttvAdvancesMin = searchParams.get("ttvAdvancesMin") || "0";
     const ttvAdvancesMax = searchParams.get("ttvAdvancesMax") || "100";
     const offset = searchParams.get("offset") || "0";
@@ -666,7 +666,7 @@ export default function CalibrationForm({
                     helperText={LABEL[lang]["main timer final phase"]}
                     name="overworldFrames"
                     minimumValue={0}
-                    maximumValue={4294967295}
+                    maximumValue={parseInt(advancesMax)}
                     onChange={(_, value) => {
                         setCalibrationURLState({
                             overworldFrames: value.value,
@@ -692,7 +692,7 @@ export default function CalibrationForm({
                     }}
                     value={[ttvAdvancesMin, ttvAdvancesMax]}
                     minimumValue={0}
-                    maximumValue={4294967295}
+                    maximumValue={isSwitch ? parseInt(overworldFrames) : parseInt(advancesMax)}
                 />
             )}
             {isFRLG && (
