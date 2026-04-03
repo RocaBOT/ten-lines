@@ -153,7 +153,7 @@ export const LABEL: Record<string, Record<string, string>> = {
         "help": "Help",
         "mono": "Mono",
         "stereo": "Stereo",
-        "l-eq-a": "L=A",
+        "l eq a": "L=A",
         "lr": "LR",
         "seed button": "Seed Button",
         "extra button": "Extra Button",
