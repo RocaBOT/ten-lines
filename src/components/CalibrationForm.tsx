@@ -551,7 +551,12 @@ export default function CalibrationForm({
                         gameConsole
                     )}ms)`;
                 }}
-                filterOptions={targetSeedFilterOptions}
+                filterOptions={(option, _) => targetSeedFilterOptions(option.slice(
+                    Math.max(targetSeedIndex - 50, 0),
+                    Math.min(
+                        targetSeedIndex + 50,
+                        seedList.length
+                    )), _)}
                 renderInput={(params) => (
                     <TextField
                         {...params}
